@@ -6,8 +6,8 @@ import io.agroal.api.security.NamePrincipal;
 import io.agroal.api.security.SimplePassword;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Singleton;
-import jakarta.ws.rs.Produces;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.time.Duration;
@@ -33,6 +33,25 @@ public class DatabaseConfig {
     @ConfigProperty(name = "aisera_postgres_db_password", defaultValue = "test")
     String dbPassword;
 
+    @ConfigProperty(name = "agroal_pool_init_size", defaultValue = "10")
+    int poolInitSize;
+
+    @ConfigProperty(name = "agroal_pool_max_size", defaultValue = "10")
+    int poolMaxSize;
+
+    @ConfigProperty(name = "agroal_pool_min_size", defaultValue = "10")
+    int poolMinSize;
+
+    @ConfigProperty(name = "agroal_pool_idle_timeout", defaultValue = "5")
+    int poolIdleTimeoutMinutes;
+
+    @ConfigProperty(name = "agroal_pool_max_lifetime_timeout", defaultValue = "5")
+    int poolMaxLifetimeMinutes;
+
+    @ConfigProperty(name = "agroal_pool_acquisition_timeout", defaultValue = "30")
+    int poolAcquisitionTimeoutSeconds;
+
+
     @PostConstruct
     void init() throws Exception {
         AgroalDataSourceConfigurationSupplier config = new AgroalDataSourceConfigurationSupplier()
@@ -43,12 +62,12 @@ public class DatabaseConfig {
                                 .credential(new SimplePassword(dbPassword))
 
                         )
-                        .initialSize(10)
-                        .maxSize(20)
-                        .minSize(10)
-                        .idleValidationTimeout(Duration.of(5, ChronoUnit.MINUTES))
-                        .maxLifetime(Duration.of(5, ChronoUnit.MINUTES))
-                        .acquisitionTimeout(Duration.of(30, ChronoUnit.SECONDS))
+                        .initialSize(poolInitSize)
+                        .maxSize(poolMaxSize)
+                        .minSize(poolMinSize)
+                        .idleValidationTimeout(Duration.of(poolIdleTimeoutMinutes, ChronoUnit.MINUTES))
+                        .maxLifetime(Duration.of(poolMaxLifetimeMinutes, ChronoUnit.MINUTES))
+                        .acquisitionTimeout(Duration.of(poolAcquisitionTimeoutSeconds, ChronoUnit.SECONDS))
                 );
         dataSource = AgroalDataSource.from(config);
     }
