@@ -10,10 +10,24 @@ repositories {
 
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-    implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-rest'
+    implementation("io.quarkus:quarkus-rest-jackson")
+    implementation("io.quarkus:quarkus-rest-client-jackson")
+    implementation 'io.quarkus:quarkus-arc'
+
+    implementation("io.quarkus:quarkus-jdbc-postgresql")
+    // health
+    implementation("io.quarkus:quarkus-smallrye-health")
+    // swagger
+    implementation("io.quarkus:quarkus-smallrye-openapi")
+    // metrics
+    implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
+    // liquibase
+    implementation("io.quarkus:quarkus-liquibase")
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
+    testImplementation("io.quarkus:quarkus-jacoco")
 }
 
 group = 'com.aisera.dbmigration'
