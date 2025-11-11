@@ -1,4 +1,4 @@
-package com.aisera.dbmigration;
+package com.aisera.dbmigration.rest;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
