@@ -80,7 +80,7 @@ public class DatabaseConfig {
         }
     }
 
-    private String constructJdbcUrl() {
+    public String constructJdbcUrl() {
         return "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + db;
     }
 

@@ -26,7 +26,7 @@ public class DatabaseFactory {
     public void createSchema() {
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement()) {
-            stmt.execute("CREATE SCHEMA IF NOT EXISTS my_schema");
+            stmt.execute("CREATE SCHEMA IF NOT EXISTS tenant_store");
         } catch (Exception e) {
             // Handle exception (e.g., log error)
             System.out.println(e.getMessage());
