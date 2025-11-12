@@ -1,5 +1,7 @@
 quarkus create app com.aisera.dbmigration:next-gen-db-migration-service:1.0 --gradle
 
+# OpenTelemetry Collector
+Quarkus Dev Services does not automatically start an OpenTelemetry Collector for you. You need to run the collector separately, for example using Docker.
 
 # next-gen-db-migration-service
 

@@ -24,6 +24,8 @@ dependencies {
     implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
     // liquibase
     implementation("io.quarkus:quarkus-liquibase")
+    // open telemetry
+    implementation("io.quarkus:quarkus-opentelemetry")
 
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
